@@ -124,7 +124,7 @@ void UFPGAGameplayAbility::CommitExecute(const FGameplayAbilitySpecHandle Handle
 	ApplyCost(Handle, ActorInfo, ActivationInfo);
 }
 
-bool UFPGAGameplayAbility::CommitAbility(const FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilityActivationInfo ActivationInfo)
+bool UFPGAGameplayAbility::CommitAbility(const FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilityActivationInfo ActivationInfo, OUT FGameplayTagContainer* OptionalRelevantTags)
 {
 	UGameplayEffect* Effect = GetCooldownGameplayEffect();
 	if (Effect != nullptr)
@@ -136,7 +136,7 @@ bool UFPGAGameplayAbility::CommitAbility(const FGameplayAbilitySpecHandle Handle
 		}
 	}
 
-	bool bCommitted = UGameplayAbility::CommitAbility(Handle, ActorInfo, ActivationInfo);
+	bool bCommitted = UGameplayAbility::CommitAbility(Handle, ActorInfo, ActivationInfo, OptionalRelevantTags);
 
 	OnAbilityCommitted.Broadcast(this);
 

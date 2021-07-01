@@ -3,12 +3,14 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Kismet/BlueprintAsyncActionBase.h"
+
 #include "AbilitySystemComponent.h"
 #include "GameplayTagContainer.h"
+#include "Kismet/BlueprintAsyncActionBase.h"
+
 #include "FPGAAsyncTask_TagChanged.generated.h"
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnTagChanged, const FGameplayTag, Tag, int32, NewCount);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FOnTagChanged, const FGameplayTag, Tag, int32, NewCount, UAbilitySystemComponent*, AbilitySystemComponent);
 
 /**
  * Blueprint node to automatically register a listener for changes (Begin and End) to an array of Tag tags.
@@ -42,5 +44,5 @@ protected:
 
 	EGameplayTagEventType::Type EventType;
 
-	virtual void TagChanged(const FGameplayTag TagTag, int32 NewCount);
+	virtual void TagChanged(const FGameplayTag InTag, int32 NewCount);
 };

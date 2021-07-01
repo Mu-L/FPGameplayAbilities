@@ -130,7 +130,7 @@ bool UFPGAAbilityTask_WaitTargetData::ShouldSpawnTargetActor() const
 	return (bReplicates || bIsLocallyControlled || bShouldProduceTargetDataOnServer);
 }
 
-void UFPGAAbilityTask_WaitTargetData::InitializeTargetActor(AFPGAGameplayAbilityTargetActor* SpawnedActor) const
+void UFPGAAbilityTask_WaitTargetData::InitializeTargetActor(AFPGAGameplayAbilityTargetActor* SpawnedActor)
 {
 	check(SpawnedActor);
 	check(Ability);
@@ -147,7 +147,7 @@ void UFPGAAbilityTask_WaitTargetData::InitializeTargetActor(AFPGAGameplayAbility
 	SpawnedActor->CanceledDelegate.AddUObject(this, &UFPGAAbilityTask_WaitTargetData::OnTargetDataCancelledCallback);
 }
 
-void UFPGAAbilityTask_WaitTargetData::FinalizeTargetActor(AFPGAGameplayAbilityTargetActor* SpawnedActor) const
+void UFPGAAbilityTask_WaitTargetData::FinalizeTargetActor(AFPGAGameplayAbilityTargetActor* SpawnedActor)
 {
 	check(SpawnedActor);
 	check(Ability);

@@ -49,30 +49,30 @@ void UFPGAGameplayAbilitiesLibrary::AddAttributeSet(UAbilitySystemComponent* Abi
 	// Load data table
 	static const FString Context = FString(TEXT("AddAttributeSet"));
 
-	for (TFieldIterator<UProperty> It(AttributeSet->GetClass(), EFieldIteratorFlags::IncludeSuper); It; ++It)
-	{
-		UProperty* Property = *It;
-		UNumericProperty* NumericProperty = Cast<UNumericProperty>(Property);
-		if (NumericProperty)
-		{
-			FString RowNameStr = FString::Printf(TEXT("%s.%s.%s"), *GroupName.ToString(), *Property->GetOuter()->GetName(), *Property->GetName());
-
-			FAttributeMetaData* MetaData = DataTable->FindRow<FAttributeMetaData>(FName(*RowNameStr), Context, true);
-			if (MetaData)
-			{
-				void* Data = NumericProperty->ContainerPtrToValuePtr<void>(AttributeSet);
-				NumericProperty->SetFloatingPointPropertyValue(Data, MetaData->BaseValue);
-				GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("%s: %f"), *RowNameStr, MetaData->BaseValue));
-
-				FGameplayAttribute AttributeToModify(NumericProperty);
-				AttributeSet->GetOwningAbilitySystemComponent()->SetNumericAttributeBase(AttributeToModify, MetaData->BaseValue);
-			}
-			else
-			{
-				GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("%s not found"), *RowNameStr));
-			}
-		}
-	}
+	// for (TFieldIterator<UProperty> It(AttributeSet->GetClass(), EFieldIteratorFlags::IncludeSuper); It; ++It)
+	// {
+	// 	UProperty* Property = *It;
+	// 	UNumericProperty* NumericProperty = Cast<UNumericProperty>(Property);
+	// 	if (NumericProperty)
+	// 	{
+	// 		FString RowNameStr = FString::Printf(TEXT("%s.%s.%s"), *GroupName.ToString(), *Property->GetOuter()->GetName(), *Property->GetName());
+	//
+	// 		FAttributeMetaData* MetaData = DataTable->FindRow<FAttributeMetaData>(FName(*RowNameStr), Context, true);
+	// 		if (MetaData)
+	// 		{
+	// 			void* Data = NumericProperty->ContainerPtrToValuePtr<void>(AttributeSet);
+	// 			NumericProperty->SetFloatingPointPropertyValue(Data, MetaData->BaseValue);
+	// 			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("%s: %f"), *RowNameStr, MetaData->BaseValue));
+	//
+	// 			FGameplayAttribute AttributeToModify(NumericProperty);
+	// 			AttributeSet->GetOwningAbilitySystemComponent()->SetNumericAttributeBase(AttributeToModify, MetaData->BaseValue);
+	// 		}
+	// 		else
+	// 		{
+	// 			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("%s not found"), *RowNameStr));
+	// 		}
+	// 	}
+	// }
 }
 
 FGameplayAbilitySpecHandle UFPGAGameplayAbilitiesLibrary::GiveAbility(UAbilitySystemComponent* AbilitySystem, TSubclassOf<UGameplayAbility> Ability)

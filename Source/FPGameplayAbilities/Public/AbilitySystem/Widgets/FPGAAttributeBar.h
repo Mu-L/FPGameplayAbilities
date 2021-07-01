@@ -42,6 +42,9 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void BindAndSetAttributes(UAbilitySystemComponent* AbilitySystem, FGameplayAttribute NewCurrent, FGameplayAttribute NewMax);
+	
+	UFUNCTION(BlueprintCallable)
+	float GetCurrentValue() const { return LastCurrentValue; }
 
 	void UnbindAttributes();
 
